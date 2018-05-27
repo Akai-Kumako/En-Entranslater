@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Vocaview</title>
+  <style type="text/css">
+    p.word { color: blue; font-size: 120%; }
+    p.pro { color: green; font-size: 80%; }
+    p.mean { color: gray; font-size: 100%; }
+    p.enmean { color: blue; font-size: 80%; }
+  </style>
+</head>
+<body>
+  <form action="{{ url_for('post') }}" method="post">
+    <input type="text" name='search' placeholder="英単語"/>
+    <button type="submit">SEARCH</button>
+  </form>
+  <hr \>  
+  {% for item in contents %}
+    <p class="word">{{ item.word }}</p>
+    <p class="pro">{{ item.pro }}</p>
+    <p class="mean">{{ item.mean }}</p>
+    <p class="enmean">{{ item.enmean }}</p>
+    <hr \>
+    {% endfor %}
+</body>
+</html>
