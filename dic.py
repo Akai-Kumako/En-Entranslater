@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 from string import Template
 
+import pymongo
+client = pymongo.MongoClient('localhost', 27017)
+db = client.enendb
+co = db.enenco
+
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -43,9 +48,9 @@ def post():
         continue
       result["enmean"] = reenmean.group(1)
 
-      results.append(result)
+      co.insert_one(result)
     
-    return render_template('vocaview.html', contents=results)
+    return render_template('vocaview.html', contents=co.find())
 
 if __name__ == '__main__':
     app.debug = True
